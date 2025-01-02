@@ -1,0 +1,29 @@
+# Dependencies
+/node_modules
+
+# Build output
+/.next
+/out
+
+# Static files
+*.log
+*.env
+*.env.local
+*.env.development
+*.env.test
+*.env.production
+
+# Debug and logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Editor-specific
+.idea
+.vscode
+.DS_Store
+
+# Miscellaneous
+coverage
+*.swp
+*.swo
