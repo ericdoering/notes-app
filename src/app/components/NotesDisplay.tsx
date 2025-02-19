@@ -29,6 +29,12 @@ export default function NotesDisplay() {
     setNotes((prevNotes) => [...prevNotes, note]);
   };
 
+  const handleEditNote = (index: number, newTitle: string, newContent: string) => {
+    setNotes((prevNotes) =>
+      prevNotes.map((note, i) => (i === index ? { title: newTitle, content: newContent } : note))
+    );
+  };
+
   return (
     <div className="p-4">
       <button
@@ -44,6 +50,7 @@ export default function NotesDisplay() {
             title={note.title}
             content={note.content}
             onRemove={() => handleRemoveNote(index)}
+            onEdit={(newTitle, newContent) => handleEditNote(index, newTitle, newContent)}
           />
         ))}
       </div>
