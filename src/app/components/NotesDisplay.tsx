@@ -1,25 +1,29 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Note from "./Note";
 import NoteForm from "./NoteForm";
 
 export default function NotesDisplay() {
   const [showForm, setShowForm] = useState(false);
-  const [notes, setNotes] = useState([
-    {
-      title: "Default Note 1",
-      content: "This is filler content for Default Note 1.",
-    },
-    {
-      title: "Default Note 2",
-      content: "This is filler content for Default Note 2.",
-    },
-    {
-      title: "Default Note 3",
-      content: "This is filler content for Default Note 3.",
-    },
-  ]);
+  const [notes, setNotes] = useState<{ title: string; content: string }[]>([]);
+
+  useEffect(() => {
+    const storedNotes = localStorage.getItem("notes");
+    if (storedNotes) {
+      setNotes(JSON.parse(storedNotes));
+    } else {
+      setNotes([
+        { title: "Default Note 1", content: "This is filler content for Default Note 1." },
+        { title: "Default Note 2", content: "This is filler content for Default Note 2." },
+        { title: "Default Note 3", content: "This is filler content for Default Note 3." },
+      ]);
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem("notes", JSON.stringify(notes));
+  }, [notes]);
 
   const handleRemoveNote = (index: number) => {
     setNotes((prevNotes) => prevNotes.filter((_, i) => i !== index));
